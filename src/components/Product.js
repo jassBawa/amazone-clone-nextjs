@@ -8,7 +8,7 @@ import { addToBasket } from "../slices/basketSlice";
 const MAX_RATING = 5;
 const MIN_RATING = 1;
 
-function Product({ key, title, price, image, description, category }) {
+function Product({ id, title, price, image, description, category }) {
   const dispatch = useDispatch();
 
   const [rating] = useState(
@@ -19,7 +19,7 @@ function Product({ key, title, price, image, description, category }) {
 
   const addItemToBasket = () => {
     const product = {
-      id: key,
+      id: id,
       title,
       price,
       image,
@@ -33,7 +33,7 @@ function Product({ key, title, price, image, description, category }) {
   };
 
   return (
-    <div className="relative flex flex-col m-5 bg-white z-30 p-10">
+    <div key={id} className="relative flex flex-col m-5 bg-white z-30 p-10">
       <p className="absolute top-2 right-2 text-xs italic text-gray-400">
         {category}
       </p>
@@ -43,7 +43,9 @@ function Product({ key, title, price, image, description, category }) {
         {Array(rating)
           .fill()
           .map((_, i) => (
-            <StarIcon key={i} className="h-5 text-yellow-500" />
+            <div key={i}>
+              <StarIcon className=" w-6 h-5 text-yellow-500" />
+            </div>
           ))}
       </div>
 
